@@ -82,6 +82,7 @@
               <th scope="col" class="px-6 py-3"> PHONE </th>
               <th scope="col" class="px-6 py-3"> ACTION </th>
             </tr>
+            </thead>
             <tbody class="text-black text-center">
       <?php
 
