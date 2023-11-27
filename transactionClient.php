@@ -22,7 +22,7 @@
           if ($cnx->errno) {
             echo "Error creating table: " . $cnx->error;
         } else {
-            echo "Table created successfully";
+            // echo "Table created successfully";
         }
 
             //insert

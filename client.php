@@ -15,7 +15,7 @@
           )";
 
           if ($cnx->query($sql) === TRUE) {
-            echo "Table created successfully";
+            // echo "Table created successfully";
           } else {
             echo "Error creating table: " . $conn->error;
           }

@@ -8,7 +8,7 @@
         )";
 
         if ($cnx->query($sql) === TRUE){
-          echo "bank table created successfully";
+          // echo "bank table created successfully";
         }else{
           echo "bank table cdoes not created successfully";
         }
