@@ -1,7 +1,20 @@
 <?php
-
 include("datacnx.php");
+    $usernameAdmin = "walidlhaila00@gmail.com";
+    $passwordAdmin = "walid@2024";
 
+      if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $username = isset($_POST["username"]) ? htmlspecialchars($_POST["username"]) : '';
+        $password = isset($_POST["password"]) ? htmlspecialchars($_POST["password"]) : '';
+
+          if($username === $usernameAdmin && $password === $passwordAdmin){
+            header("Location:admin.php");
+              exit();
+          }else{
+            header("interfaceClient.php");
+              exit();
+          }
+      }
 ?>
 
 <!DOCTYPE html>
@@ -27,17 +40,17 @@ include("datacnx.php");
       </div>
   </div>  
   <div class=" flex flex-col justify-center items-center mt-20"> 
-        <form action="">
+        <form action="" method="POST">
           <div>
               <label class="font-bold" for="username">Username/Email</label><br>
               <input class=" px-8 py-2 font-bold shadow-xl rounded-lg bg-blue-200 border-opacity-50 focus:border-blue-600" type="text" id="username" name="username">
           </div>
           <div class="">
               <label class="font-bold" for="password">Password</label><br>
-              <input class="px-8 py-2 font-bold shadow-xl rounded-lg bg-blue-200 border-opacity-50 focus:border-blue-500" type="text" id="password" name="password">
+              <input class="px-8 py-2 font-bold shadow-xl rounded-lg bg-blue-200 border-opacity-50 focus:border-blue-500" type="password" id="password" name="password">
           </div>
          <div class="flex flex-col justify-center items-center ml-10 mt-5">
-           <a href="bank.php"><button class="font-bold  px-8 py-2 border-3 rounded shadow-inner-3xl shadow-md transition ease-in duration-300 border-red-300 bg-red-600 hover:bg-blue-600 font-serif mr-[50px]">LOGIN</button></a>
+           <button type="submit" class="font-bold  px-8 py-2 border-3 rounded shadow-inner-3xl shadow-md transition ease-in duration-300 border-red-300 bg-red-600 hover:bg-blue-600 font-serif mr-[50px]">LOGIN</button>
           </div>
         </form>
   </div> 
