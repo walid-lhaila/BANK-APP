@@ -5,7 +5,7 @@
   //create table
 
           $sql = "CREATE TABLE IF NOT EXISTS clients(
-            id INT(20) UNSIGNED NOT NULL PRIMARY KEY,
+            id INT(20) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
             nom VARCHAR(30) NOT NULL,
             prenom VARCHAR(30) NOT NULL,
             naissance VARCHAR(30) NOT NULL,
@@ -42,10 +42,11 @@
               $phone = isset($_POST['phone']) ? htmlspecialchars(strtolower(trim($_POST['phone']))) : '';
               $username = isset($_POST['username']) ? htmlspecialchars(strtolower(trim($_POST['username']))) : '';
               $pass = isset(($_POST['pass'])) ? htmlspecialchars(strtolower(trim($_POST['pass']))) : '';
+              $agency_id = isset(($_POST['agency_id'])) ? htmlspecialchars(strtolower(trim($_POST['agency_id']))) : '';
           
               if ($nom && $prenom && $naissance && $nationalite && $genre && $phone && $username && $pass) {
-                  $insertsql = "INSERT INTO clients(nom,prenom,naissance,nationalite,genre,phone,username,pass)
-                                VALUES('$nom','$prenom','$naissance','$nationalite','$genre','$phone','$username','$pass')";
+                  $insertsql = "INSERT INTO clients(nom,prenom,naissance,nationalite,genre,phone,username,pass,agency_id)
+                                VALUES('$nom','$prenom','$naissance','$nationalite','$genre','$phone','$username','$pass','$agency_id')";
                   mysqli_query($cnx, $insertsql);
                   echo "Valid";
               } else {
@@ -114,7 +115,7 @@
                                 <td>{$row['genre']}</td>
                                 <td>{$row['phone']}</td>
                                 <td>{$row['username']}</td>
-                                <td>{$row['**********']}</td>
+                                <td>{$row['pass']}</td>
                                 <td>{$row['agency_id']}</td>
                                 <td>
                                     <a href='{$row["id"]}' class='font-bold text-white h-8 rounded cursor-pointer px-3 bg-gray-700 shadow-md transition ease-out duration-500 border-gray-700 '>EDIT</a>
