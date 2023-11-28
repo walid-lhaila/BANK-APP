@@ -1,7 +1,7 @@
 <?php
     include("datacnx.php");
 
-        $sql "CREATE TABLE IF NOT EXISTS adresse(
+        $sql = "CREATE TABLE IF NOT EXISTS adresse(
             id INT(10) AUTO_INCREMENT NOT NULL PRIMARY KEY,
             ville VARCHAR(255) NOT NULL,
             quartier VARCHAR(255) NOT NULL,
@@ -11,8 +11,17 @@
             telephone INT(15) NOT NULL,
             agency_id INT(10) UNSIGNED NOT NULL,
             client_id INT(10) UNSIGNED NOT NULL,
-            
+            FOREIGN KEY (agency_id) REFERENCES agency(id),
+            FOREIGN KEY (client_id) REFERENCES clients(id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
         )";
+
+                if($cnx->query($sql) === TRUE){
+                    // echo "table adresse created successfully";
+                }else{
+                    echo "table adresse not created successfully";
+                }
 
 
 
@@ -35,7 +44,7 @@
 
 
 <div class="container ml-[260px]">
-    <button id="cardbank" class="font-bold mt-10 ml-10 px-5 py-1 border-3 shadow-md transition ease-in duration-500 border-blue-300 dark:bg-gray-700 text-gray-200  font-serif ">+ Add Bank</button>
+    <button id="cardbank" class="font-bold mt-10 ml-10 px-5 py-1 border-3 shadow-md transition ease-in duration-500 border-blue-300 dark:bg-gray-700 text-gray-200  font-serif ">+ Add ADRESSE</button>
 
         <div class="relative ml-[40px] top-10">
             <table class="w-[1200px] text-center text-sm text-left rtl:text-right text-gray-200 dark:text-gray-200">
