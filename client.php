@@ -21,7 +21,7 @@
             )";
 
             if ($cnx->query($sql) === TRUE) {
-              echo "Table created successfully";
+              // echo "Table created successfully";
             } else {
               echo "Error creating table: " . $cnx->error;
             }
@@ -133,7 +133,7 @@
         ?>
         </table>
       </div>
-      <div class="flex flex-row gap-10 mx-auto fixed top-48 left-[600px]  z-10  justify-between p-10 items-center bg-black border border-gray-500 rounded-md max-w-screen-lg  transform scale-0  transition duration-700 ease-in-out" id="formclient">
+      <div class="flex flex-row gap-10 mx-auto fixed top-44 left-[600px]  z-10  justify-between p-10 items-center bg-black border border-gray-500 rounded-md max-w-screen-lg  transform scale-0  transition duration-700 ease-in-out" id="formclient">
         <form action="client.php" method="POST" class="max-w-md mx-auto">
           <div class="flex justify-end">
           <a href="client.php"><img class="h-[20px]" src="icons8-close-50.png" alt="" ></a>
