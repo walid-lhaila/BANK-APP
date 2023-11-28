@@ -5,7 +5,11 @@ include("datacnx.php");
       id INT(20) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
       longitude VARCHAR(60) NOT NULL,
       latitude VARCHAR(60) NOT NULL,
-      adresse VARCHAR(100) NOT NULL
+      adresse VARCHAR(100) NOT NULL,
+      bank_id INT(20) UNSIGNED NOT NULL,
+      FOREIGN KEY (bank_id) REFERENCES bank(id) 
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
       )";
 
 if ($cnx->query($sql) === TRUE) {
@@ -20,10 +24,11 @@ if ($cnx->query($sql) === TRUE) {
              $longitude = isset($_POST['longitude'])? htmlspecialchars(strtolower(trim($_POST['longitude']))) : '';
              $latitude = isset($_POST['latitude']) ? htmlspecialchars(strtolower(trim($_POST['latitude']))) : '';
              $adresse = isset($_POST['adresse'])? htmlspecialchars(strtolower(trim($_POST['adresse']))) : '';
+             $bank_id = isset($_POST['bank_id'])? htmlspecialchars(strtolower(trim($_POST['bank_id']))) : '';
 
                  if($longitude && $latitude && $adresse){
-                   $insertsql = "INSERT INTO agency(longitude,latitude,adresse) 
-                   VALUES ('$longitude', '$latitude', '$adresse')";
+                   $insertsql = "INSERT INTO agency(longitude,latitude,adresse,bank_id) 
+                   VALUES ('$longitude', '$latitude', '$adresse', '$bank_id')";
                        mysqli_query($cnx, $insertsql);
                        echo "insert valid";
                  }else{
@@ -73,6 +78,9 @@ include("navbar.php");
                 <th scope="col" class="px-6 py-3">
                     ADRESSE
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    BANK ID
+                </th>
                 <th scope="col" class="px-6 py-3"> ACTION </th>
             </tr>
             </thead>
@@ -95,6 +103,8 @@ include("navbar.php");
                   <td> {$row['longitude']}</td>
                   <td> {$row['latitude']}</td>
                   <td> {$row['adresse']}</td>
+                  <td> {$row['bank_id']}</td>
+                  
                   <td>
                         <a href='{$row["id"]}' class='font-bold text-white h-8 rounded cursor-pointer px-3 bg-gray-700 shadow-md transition ease-out duration-500 border-gray-700 '>EDIT</a>
                         <a href='deletagency.php?id={$row["id"]}' class='font-bold text-white h-8 rounded  cursor-pointer px-2 bg-red-700 shadow-md transition ease-out duration-500 border-red-700 '>DELET</a>
@@ -127,6 +137,10 @@ include("navbar.php");
           <div class="relative z-0 w-full mb-5 group">
             <input type="text" name="adresse" id="adresse" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
             <label for="adresse" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ADRESSE</label>
+          </div>
+          <div class="relative z-0 w-full mb-5 group">
+            <input type="text" name="bank_id" id="bank_id" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="bank_id" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">BANK ID</label>
           </div>
           
             
