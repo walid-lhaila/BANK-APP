@@ -31,7 +31,7 @@
                         $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : '';
                         $telephone = isset($_POST["telephone"]) ? htmlspecialchars($_POST["telephone"]) : '';
                         $agency_id = isset($_POST ["agency_id"]) ? htmlspecialchars($_POST["agency_id"]) : '';
-                        $clinet_id = isset($_POST["clinet_id"]) ? htmlspecialchars($_POST["client_id"]) : '';
+                        $client_id = isset($_POST["clinet_id"]) ? htmlspecialchars($_POST["client_id"]) : '';
 
                                 if($ville && $quartier && $rue && $codepostal && $email && $telephone && $agency_id && $client_id){
                                     $insertsql = "INSERT INTO adresse (ville,quartier,rue,codepostal,email,telephone,agency_id,clinet_id) 
