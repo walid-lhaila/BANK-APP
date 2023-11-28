@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
 
 <?php
