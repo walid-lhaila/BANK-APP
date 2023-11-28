@@ -20,7 +20,7 @@
           
 
           if ($cnx->errno) {
-            echo "Error creating table: " . $cnx->error;
+            echo "Error creating table: ooooooooooooooooo" . $cnx->error;
         } else {
             // echo "Table created successfully";
         }

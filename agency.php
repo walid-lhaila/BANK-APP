@@ -32,7 +32,7 @@ if ($cnx->query($sql) === TRUE) {
                        mysqli_query($cnx, $insertsql);
                        echo "insert valid";
                  }else{
-                   echo "insert invalid";
+                   echo "insert invalidooooooooooooooooooooooooooooo";
                  }
            }
 

@@ -39,7 +39,7 @@
                                         mysqli_query($cnx, $insertsql);
                                         // echo "insert valid mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
                                 }else{
-                                    echo "insert invalid veuillez saisir tous les champs";
+                                    echo "insert invalid veuillez saisir tous les champsooooooooooooooooooooo";
                                 }
                     }
 

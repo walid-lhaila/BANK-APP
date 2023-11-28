@@ -7,11 +7,15 @@
         logo VARCHAR(255) NOT NULL
         )";
 
+
         if ($cnx->query($sql) === TRUE){
           // echo "bank table created successfully";
         }else{
           echo "bank table cdoes not created successfully";
         }
+
+
+
 
           if(isset($_POST['submit'])){
             $nom = isset($_POST['nom']) ? htmlspecialchars (strtolower(trim($_POST['nom']))) : '';
@@ -24,7 +28,7 @@
               mysqli_query($cnx, $insertsql);
               // echo "insert valid";
             }else{
-              echo "invalid insert";
+              echo "invalid insert ooooooooooooooooooooooooo";
             }
           }
 

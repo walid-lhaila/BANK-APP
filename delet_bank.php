@@ -3,8 +3,7 @@
 
         if(isset($_GET["id"])){
             $id = $_GET["id"];
-            // die($id); 
-
+      
             $deletsql = "DELETE FROM bank WHERE id ='$id'" ;
             if(mysqli_query($cnx, $deletsql)){
                 echo "bank deleted successfully";
@@ -12,6 +11,7 @@
                  
                 echo "bank does not deleted successfully";
             }
+      
         
         }
         header("location: bank.php");
