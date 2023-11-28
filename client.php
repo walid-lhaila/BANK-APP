@@ -4,21 +4,27 @@
 
   //create table
 
-        $sql = "CREATE TABLE IF NOT EXISTS clients(
-          id INT(20) UNSIGNED NOT NULL PRIMARY KEY,
-          nom VARCHAR(30) NOT NULL,
-          prenom VARCHAR(30) NOT NULL,
-          naissance VARCHAR(30) NOT NULL,
-          nationalite VARCHAR(30) NOT NULL,
-          genre VARCHAR(30) NOT NULL,
-          phone VARCHAR(30) NOT NULL
-          )";
+          $sql = "CREATE TABLE IF NOT EXISTS clients(
+            id INT(20) UNSIGNED NOT NULL PRIMARY KEY,
+            nom VARCHAR(30) NOT NULL,
+            prenom VARCHAR(30) NOT NULL,
+            naissance VARCHAR(30) NOT NULL,
+            nationalite VARCHAR(30) NOT NULL,
+            genre VARCHAR(30) NOT NULL,
+            phone VARCHAR(30) NOT NULL,
+            username VARCHAR(30) NOT NULL,
+            pass VARCHAR(30) NULL,
+            agency_id INT(30) UNSIGNED NOT NULL,
+            FOREIGN KEY (agency_id) REFERENCES agency(id)
+            ON DELETE CASCADE 
+            ON UPDATE CASCADE
+            )";
 
-          if ($cnx->query($sql) === TRUE) {
-            // echo "Table created successfully";
-          } else {
-            echo "Error creating table: " . $conn->error;
-          }
+            if ($cnx->query($sql) === TRUE) {
+              echo "Table created successfully";
+            } else {
+              echo "Error creating table: " . $cnx->error;
+            }
 
 
 
@@ -34,10 +40,12 @@
               $nationalite = isset($_POST['nationalite']) ? htmlspecialchars(strtolower(trim($_POST['nationalite']))) : '';
               $genre = isset($_POST['genre']) ? htmlspecialchars(strtolower(trim($_POST['genre']))) : '';
               $phone = isset($_POST['phone']) ? htmlspecialchars(strtolower(trim($_POST['phone']))) : '';
+              $username = isset($_POST['username']) ? htmlspecialchars(strtolower(trim($_POST['username']))) : '';
+              $pass = isset(($_POST['pass'])) ? htmlspecialchars(strtolower(trim($_POST['pass']))) : '';
           
-              if ($nom && $prenom && $naissance && $nationalite && $genre && $phone) {
-                  $insertsql = "INSERT INTO clients(nom,prenom,naissance,nationalite,genre,phone)
-                                VALUES('$nom','$prenom','$naissance','$nationalite','$genre','$phone')";
+              if ($nom && $prenom && $naissance && $nationalite && $genre && $phone && $username && $pass) {
+                  $insertsql = "INSERT INTO clients(nom,prenom,naissance,nationalite,genre,phone,username,pass)
+                                VALUES('$nom','$prenom','$naissance','$nationalite','$genre','$phone','$username','$pass')";
                   mysqli_query($cnx, $insertsql);
                   echo "Valid";
               } else {
@@ -80,6 +88,9 @@
               <th scope="col" class="px-6 py-3"> NATIONALITE </th>
               <th scope="col" class="px-6 py-3"> GENRE </th>
               <th scope="col" class="px-6 py-3"> PHONE </th>
+              <th scope="col" class="px-6 py-3"> USERNAME </th>
+              <th scope="col" class="px-6 py-3"> PASSWORD </th>
+              <th scope="col" class="px-6 py-3"> AGENCY ID </th>
               <th scope="col" class="px-6 py-3"> ACTION </th>
             </tr>
             </thead>
@@ -102,6 +113,9 @@
                                 <td>{$row['nationalite']}</td>
                                 <td>{$row['genre']}</td>
                                 <td>{$row['phone']}</td>
+                                <td>{$row['username']}</td>
+                                <td>{$row['**********']}</td>
+                                <td>{$row['agency_id']}</td>
                                 <td>
                                     <a href='{$row["id"]}' class='font-bold text-white h-8 rounded cursor-pointer px-3 bg-gray-700 shadow-md transition ease-out duration-500 border-gray-700 '>EDIT</a>
                                     <a href='delet_client.php?id={$row["id"]}' class='font-bold text-white h-8 rounded  cursor-pointer px-2 bg-red-700 shadow-md transition ease-out duration-500 border-red-700 '>DELET</a>
@@ -151,6 +165,18 @@
             <div class="relative z-0 w-full mb-5 group">
               <input type="text" name="phone" id="phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
               <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">TELEPHONE</label>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+              <input type="text" name="username" id="username" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="username" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">USERNAME</label>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+              <input type="text" name="pass" id="pass" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="pass" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PASSWORD</label>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+              <input type="text" name="agency_id" id="agency_id" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="agency_id" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">AGENCY ID</label>
             </div>
           </div>
           <div class="flex justify-center">

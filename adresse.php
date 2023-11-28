@@ -31,13 +31,13 @@
                         $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : '';
                         $telephone = isset($_POST["telephone"]) ? htmlspecialchars($_POST["telephone"]) : '';
                         $agency_id = isset($_POST ["agency_id"]) ? htmlspecialchars($_POST["agency_id"]) : '';
-                        $client_id = isset($_POST["clinet_id"]) ? htmlspecialchars($_POST["client_id"]) : '';
+                        $client_id = isset($_POST["client_id"]) ? htmlspecialchars($_POST["client_id"]) : '';
 
                                 if($ville && $quartier && $rue && $codepostal && $email && $telephone && $agency_id && $client_id){
-                                    $insertsql = "INSERT INTO adresse (ville,quartier,rue,codepostal,email,telephone,agency_id,clinet_id) 
+                                    $insertsql = "INSERT INTO adresse (ville,quartier,rue,codepostal,email,telephone,agency_id,client_id) 
                                     VALUES ('$ville','$quartier','$rue','$codepostal','$email','$telephone','$agency_id','$client_id')";
                                         mysqli_query($cnx, $insertsql);
-                                        echo "insert valid mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
+                                        // echo "insert valid mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
                                 }else{
                                     echo "insert invalid veuillez saisir tous les champs";
                                 }
@@ -55,6 +55,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body class="overflow-x-hidden">
@@ -68,7 +69,7 @@
 
         <div class="relative ml-[40px] top-10">
             <table class="w-[1200px] text-center text-sm text-left rtl:text-right text-gray-200 dark:text-gray-200">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-200">
+                <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-200">
                     <tr>
                         <th scope="col" class="px-6 py-3">ID</th>
                         <th scope="col" class="px-6 py-3">VILLE</th>
@@ -79,11 +80,57 @@
                         <th scope="col" class="px-6 py-3"> TELEPHONE </th>
                         <th scope="col" class="px-6 py-3"> AGENCY ID </th>
                         <th scope="col" class="px-6 py-3"> CLIENT ID </th>
+                        <th scope="col" class="px-6 py-3">ACTION</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                </tbody>
-            </table>
+                    <?php
+                        if(!$cnx){
+                            die("you are not allowed connecting :" . mysqli_connect_error());
+                        }
+                            $sql = "SELECT * FROM adresse";
+
+                                $result = mysqli_query($cnx, $sql);
+
+                                    if($result){
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo "<tr>
+                                            <td> {$row['id']}</td>
+                                            <td> {$row['ville']}</td>
+                                            <td> {$row['quartier']}</td>
+                                            <td> {$row['rue']}</td>
+                                            <td> {$row['codepostal']}</td>
+                                            <td> {$row['email']}</td>
+                                            <td> {$row['telephone']}</td>
+                                            <td> {$row['agency_id']}</td>
+                                            <td> {$row['client_id']}</td>
+                                            <td class='flex gap-[8px] justify-center'>
+                                    
+                                           
+                                                <a href='{$row["id"]}'>
+                                                    <svg class='w-6 h-6 text-gray-700 dark:text-gray hover:text-blue-600' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 20 18'>
+                                                        <path d='M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z'/>
+                                                        <path d='M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z'/>
+                                                      </svg>
+                                                </a>
+                                            
+                                                <a href='{$row["id"]}'>
+                                                    <svg class='w-6 h-6 text-gray-800 dark:text-gray hover:text-red-600' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 20'>
+                                                    <path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z'/>
+                                                </svg></a>
+                                                       
+                                            </td>
+                                        </tr>";        
+                                        }
+                                        echo "</tbody></table>";
+                                    }else{
+                                        echo "Erreur lors de l'exécution de la requête : " . mysqli_error($cnx);
+                                    }
+
+
+
+                    ?>
         </div>
 
 
