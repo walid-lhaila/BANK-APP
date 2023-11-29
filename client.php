@@ -49,11 +49,13 @@
                   $insertsql = "INSERT INTO clients(nom,prenom,naissance,nationalite,genre,phone,username,pass,agency_id)
                                 VALUES('$nom','$prenom','$naissance','$nationalite','$genre','$phone','$username','$pass','$agency_id')";
                   mysqli_query($cnx, $insertsql);
+                  
                   echo "Valid";
               } else {
                   echo "Veuillez saisir tous les champs";
               }
           }
+
 
 
                 
@@ -181,8 +183,10 @@
               <label for="agency_id" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">AGENCY ID</label>
             </div>
             <div class="relative z-0 w-full mb-5 group">
-              <select name="" id="">
-                <option value=""></option>
+              <label for="role" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CHOOSE A ROLE</label>
+              <select class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" name="role" id="role">
+                <option class="text-gray-800" value="admin">admin</option>
+                <option class="text-gray-800" value="clinet">client</option>
               </select>
             </div>
           </div>
