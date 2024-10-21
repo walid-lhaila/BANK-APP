@@ -3,7 +3,7 @@ Contexte du projet
 
 **1. Contexte **
 
-​
+
 
 Dans le cadre de son engagement continu à offrir des services bancaires innovants et à rester à la pointe de la technologie, CIH Banque a décidé d'élargir les fonctionnalités de son système de gestion existant. Ce cahier des charges étend le projet initial de gestion bancaire pour inclure la gestion des utilisateurs, des rôles, des banques, des agences, des distributeurs et des adresses. L'objectif est d'enrichir l'expérience des étudiants en informatique en intégrant de nouvelles fonctionnalités et en étendant les opérations CRUD.
 
